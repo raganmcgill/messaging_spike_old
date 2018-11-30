@@ -1,0 +1,32 @@
+﻿@model List<dashboard.ui.Models.Server>
+
+@foreach (var server in Model)
+{
+    <h1>@server.Name</h1>
+    <div class="row">
+        @foreach (var database in server.Databases)
+        {
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @database.Name
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            <tr>
+                                <th># of Tables</th>
+                                <td>@database.Tables.Count</td>
+                            </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        @DateTime.Now
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
