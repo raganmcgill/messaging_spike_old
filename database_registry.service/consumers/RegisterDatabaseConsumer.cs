@@ -5,13 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using common_models;
+using database_registry.service.messages;
 using helpers;
 using message_types;
 using MassTransit;
 using Newtonsoft.Json;
-using schema_scanner.service.messages;
 
-namespace schema_scanner.service.consumers
+namespace database_registry.service.consumers
 {
     internal class RegisterDatabaseConsumer : IConsumer<RegisterDatabase>
     {

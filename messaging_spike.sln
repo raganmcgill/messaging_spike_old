@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmitLog", "EmitLog\EmitLog.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveLogs", "ReceiveLogs\ReceiveLogs.csproj", "{37EB88F3-14F3-4184-B3CD-3663DD0602BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "database_registry.service", "database_registry.service\database_registry.service.csproj", "{86BCB8DF-6036-4208-90C8-73F9575D9537}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{37EB88F3-14F3-4184-B3CD-3663DD0602BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37EB88F3-14F3-4184-B3CD-3663DD0602BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37EB88F3-14F3-4184-B3CD-3663DD0602BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86BCB8DF-6036-4208-90C8-73F9575D9537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86BCB8DF-6036-4208-90C8-73F9575D9537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86BCB8DF-6036-4208-90C8-73F9575D9537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86BCB8DF-6036-4208-90C8-73F9575D9537}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +130,7 @@ Global
 		{471B001B-44E2-496D-B0C4-2B4E688AD487} = {719D6458-71FC-4E3E-A84A-A14D621A705F}
 		{54A8F3BD-23E9-437D-AC0E-169D797D5A7E} = {471B001B-44E2-496D-B0C4-2B4E688AD487}
 		{37EB88F3-14F3-4184-B3CD-3663DD0602BE} = {471B001B-44E2-496D-B0C4-2B4E688AD487}
+		{86BCB8DF-6036-4208-90C8-73F9575D9537} = {24FF93D6-A31E-4E38-B8F5-439E76503E11}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB70CC42-A5D9-4968-9A96-5A7D6D98895F}

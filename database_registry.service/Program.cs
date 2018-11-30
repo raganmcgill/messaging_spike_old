@@ -1,9 +1,9 @@
 ﻿using System;
+using database_registry.service.consumers;
 using helpers;
 using MassTransit;
-using schema_scanner.service.consumers;
 
-namespace schema_scanner.service
+namespace database_registry.service
 {
     class Program
     {
@@ -24,13 +24,18 @@ namespace schema_scanner.service
 
                 sbc.ReceiveEndpoint(host, queueName, ep =>
                 {
-                    ep.Bind(exchangeName);
+                    //ep.Bind(exchangeName);
                     ep.Consumer(() => new RegisterDatabaseConsumer());
                 });
 
             });
 
             bus.Start();
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+
+            bus.Stop();
         }
     }
 }

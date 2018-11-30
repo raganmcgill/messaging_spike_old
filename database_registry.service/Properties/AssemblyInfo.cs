@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("schema_scanner.service")]
+[assembly: AssemblyTitle("database_registry.service")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("schema_scanner.service")]
+[assembly: AssemblyProduct("database_registry.service")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1a1108fe-650e-4e8c-a551-2b2cdfc84215")]
+[assembly: Guid("86bcb8df-6036-4208-90c8-73f9575d9537")]
 
 // Version information for an assembly consists of the following four values:
 //

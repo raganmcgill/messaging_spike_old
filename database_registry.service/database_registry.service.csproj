@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A1108FE-650E-4E8C-A551-2B2CDFC84215}</ProjectGuid>
+    <ProjectGuid>{86BCB8DF-6036-4208-90C8-73F9575D9537}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>schema_scanner.service</RootNamespace>
-    <AssemblyName>schema_scanner.service</AssemblyName>
+    <RootNamespace>database_registry.service</RootNamespace>
+    <AssemblyName>database_registry.service</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -81,12 +81,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Header.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SchemaSQL.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\common_models\common_models.csproj">
       <Project>{A23946AC-7515-4011-80E8-EFC9596F39A1}</Project>
       <Name>common_models</Name>
@@ -99,6 +93,14 @@
       <Project>{A3D8652A-C317-4DDA-A838-C985501CB365}</Project>
       <Name>message_types</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Header.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SchemaSQL.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

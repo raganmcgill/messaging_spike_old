@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace schema_scanner.service.models
+﻿namespace database_registry.service.models
 {
     public class DatabaseConnectionDetails
     {
