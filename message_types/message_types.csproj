@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RegisterDatabase.cs" />
-    <Compile Include="DatabaseRegistered.cs" />
-    <Compile Include="DeleteDatabase.cs" />
+    <Compile Include="events\ScriptFormatted.cs" />
+    <Compile Include="commands\FormatScript.cs" />
+    <Compile Include="commands\RegisterDatabase.cs" />
+    <Compile Include="events\DatabaseRegistered.cs" />
+    <Compile Include="commands\DeleteDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +52,9 @@
       <Project>{A23946AC-7515-4011-80E8-EFC9596F39A1}</Project>
       <Name>common_models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="commands\Example Commands\FormatScript.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

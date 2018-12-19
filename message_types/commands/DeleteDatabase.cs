@@ -1,4 +1,4 @@
-﻿namespace message_types
+﻿namespace message_types.commands
 {
     public interface DeleteDatabase
     {

@@ -8,6 +8,8 @@ using common_models;
 using database_registry.service.messages;
 using helpers;
 using message_types;
+using message_types.commands;
+using message_types.events;
 using MassTransit;
 using Newtonsoft.Json;
 
@@ -84,7 +86,7 @@ namespace database_registry.service.consumers
         {
             var tables = new List<Table>();
             string queryString = System.IO.File.ReadAllText("SchemaSQL.sql");
-            string connectionString = $"Data Source={database.Server};Initial Catalog={database.Database};Integrated Security=False;User ID={database.Username};Password={database.Password};Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string connectionString = $"Data Source={database.Server};Initial Catalog={database.Database};Integrated Security=False;User ID={database.User};Password={database.Password};Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

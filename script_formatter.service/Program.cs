@@ -1,16 +1,16 @@
 ﻿using System;
-using dashboard.service.consumers;
+using database_registry.service.consumers;
 using helpers;
 using MassTransit;
 
-namespace dashboard.service
+namespace script_formatter.service
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string exchangeName = "DatabaseRegistry";
-            string queueName = "DatabaseRegistered";
+            string exchangeName = "Formatting";
+            string queueName = "FormatScript";
 
             ConsoleAppHelper.PrintHeader("Header.txt");
 
@@ -24,13 +24,18 @@ namespace dashboard.service
 
                 sbc.ReceiveEndpoint(host, queueName, ep =>
                 {
-                    ep.Bind(exchangeName);
-                    ep.Consumer(() => new DatabaseRegisteredConsumer());
+                    //ep.Bind(exchangeName);
+                    ep.Consumer(() => new FormatScriptConsumer());
                 });
 
             });
 
             bus.Start();
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+
+            bus.Stop();
         }
     }
 }

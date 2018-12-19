@@ -1,5 +1,7 @@
 ﻿using common_models;
 using message_types;
+using message_types.commands;
+using message_types.events;
 
 namespace database_registry.service.messages
 {

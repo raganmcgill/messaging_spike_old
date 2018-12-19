@@ -1,0 +1,9 @@
+﻿{
+  "messageType": [
+    "urn:message:message_types.commands:FormatScript"
+  ],
+
+  "message": {
+    "script": "SELECT p.Name AS ProductName, NonDiscountSales = (OrderQty * UnitPrice),Discounts = ((OrderQty * UnitPrice) * UnitPriceDiscount) FROM Production.Product AS p INNER JOIN Sales.SalesOrderDetail AS sod ON p.ProductID = sod.ProductID ORDER BY ProductName DESC; "
+  }
+}

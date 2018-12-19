@@ -1,6 +1,7 @@
 ﻿using common_models;
+using message_types.commands;
 
-namespace message_types
+namespace message_types.events
 {
     public interface DatabaseRegistered
     {
