@@ -16,16 +16,17 @@ namespace database_registry.service
 
         static void Main(string[] args)
         {
+            ConsoleAppHelper.PrintHeader("Header.txt");
+
             RunMassTransitReceiverWithRabbit();
         }
 
         private static void RunMassTransitReceiverWithRabbit()
         {
-            ConsoleAppHelper.PrintHeader("Header.txt");
 
-            IBusControl rabbitBusControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>
+            var rabbitBusControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>
             {
-                IRabbitMqHost rabbitMqHost = rabbit.Host(new Uri(RabbitMqAddress), settings =>
+                var rabbitMqHost = rabbit.Host(new Uri(RabbitMqAddress), settings =>
                 {
                     settings.Password(RabbitUsername);
                     settings.Username(RabbitPassword);

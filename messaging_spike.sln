@@ -57,7 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "script_formatter", "script_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "script_formatter.service", "script_formatter.service\script_formatter.service.csproj", "{465F0CDC-4108-44DA-AB45-8E6F8EEEF54B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleToast", "ConsoleToast-master\ConsoleToast.csproj", "{89955872-E4C5-4E44-B27D-0EC56BF50107}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications", "ConsoleToast-master\Notifications.csproj", "{89955872-E4C5-4E44-B27D-0EC56BF50107}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "monitor", "monitor", "{A3FC8181-B7D8-4619-BFC3-761811E3F43F}"
 EndProject

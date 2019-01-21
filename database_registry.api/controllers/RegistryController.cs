@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Http;
 using database_registry.api.models;
@@ -13,6 +14,8 @@ namespace database_registry.api.controllers
         private readonly IBusControl _bus;
         private readonly string _rabbitMqAddress = "rabbitmq://localhost";
         private readonly string _rabbitMqQueue = "redgate.queues";
+        private static readonly string RabbitUsername = ConfigurationManager.AppSettings["RabbitUserName"];
+        private static readonly string RabbitPassword = ConfigurationManager.AppSettings["RabbitPassword"];
 
         public RegistryController()
         {
@@ -22,8 +25,8 @@ namespace database_registry.api.controllers
                            {
                                rabbit.Host(rabbitMqRootUri, settings =>
                                {
-                                   settings.Password("guest");
-                                   settings.Username("guest");
+                                   settings.Password(RabbitUsername);
+                                   settings.Username(RabbitPassword);
                                });
                            });
         }
@@ -44,7 +47,7 @@ namespace database_registry.api.controllers
 
             ISendEndpoint sendEndpoint = sendEndpointTask.Result;
 
-            Task sendTask = sendEndpoint.Send<RegisterDatabase>(new {Server = value.Server, Database = value.Database, User = value.User, Password = value.Password });
+            Task sendTask = sendEndpoint.Send<RegisterDatabase>(new { Server = value.Server, Database = value.Database, User = value.User, Password = value.Password });
         }
 
         [HttpPost]

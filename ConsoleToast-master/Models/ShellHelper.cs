@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using MS.WindowsAPICodePack.Internal;
 
-namespace ConsoleToast
+namespace Notifications.Models
 {
     internal enum STGM : long
     {

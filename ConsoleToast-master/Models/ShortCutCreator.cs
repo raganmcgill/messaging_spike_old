@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using ConsoleToast;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using MS.WindowsAPICodePack.Internal;
 
-namespace notifications
+namespace Notifications.Models
 {
     public partial class DatabaseRegisteredConsumer
     {
-        static class ShortCutCreator
+        public static class ShortCutCreator
         {
             // In order to display toasts, a desktop application must have
             // a shortcut on the Start menu.
