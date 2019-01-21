@@ -11,9 +11,8 @@ namespace database_registry.api
         {
             ConsoleAppHelper.PrintHeader("Header.txt");
 
-            string baseAddress = "http://localhost:9111/api/registry/";
+            var baseAddress = "http://localhost:9111/api/registry/";
 
-            // Start OWIN host 
             using (WebApp.Start<Startup>(url: baseAddress))
             {
                 HttpClient client = new HttpClient();
