@@ -17,22 +17,6 @@ namespace database_registry.service.consumers
 {
     internal class RegisterDatabaseConsumer : IConsumer<RegisterDatabase>
     {
-        private IBusControl bus;
-
-        public RegisterDatabaseConsumer()
-        {
-            bus = Bus.Factory.CreateUsingRabbitMq(sbc =>
-            {
-                var host = sbc.Host(new Uri("rabbitmq://localhost"), h =>
-                {
-                    h.Username("guest");
-                    h.Password("guest");
-                });
-            });
-
-            bus.Start();
-        }
-
         public Task Consume(ConsumeContext<RegisterDatabase> context)
         {
             ConsoleAppHelper.PrintHeader("Header.txt");
@@ -41,14 +25,14 @@ namespace database_registry.service.consumers
 
             StoreDatabaseDefinition(context.Message, tableDefinition);
 
-            PublishTables(context.Message, tableDefinition);
+            PublishTables(context.Message, tableDefinition, context);
 
             Console.WriteLine($"Registered database with {tableDefinition.Count} tables at {DateTime.Now}");
 
             return Task.CompletedTask;
         }
 
-        private void PublishTables(RegisterDatabase database, List<Table> tables)
+        private void PublishTables(RegisterDatabase database, List<Table> tables, ConsumeContext<RegisterDatabase> context)
         {
             var message = new DatabaseRegisteredMessage
             {
@@ -56,13 +40,13 @@ namespace database_registry.service.consumers
                 Schema = new Schema { Tables = tables }
             };
 
-            bus.Publish<DatabaseRegistered>(message);
+            context.Publish<DatabaseRegistered>(message);
             
         }
 
         private void StoreDatabaseDefinition(RegisterDatabase database, List<Table> tables)
         {
-            string subPath = $@"C:\dev\Stores\SchemaScanner\{database.Server}\{database.Database}"; // your code goes here
+            var subPath = $@"C:\dev\Stores\SchemaScanner\{database.Server}\{database.Database}";
 
             if (!Directory.Exists(subPath))
             {
@@ -85,15 +69,17 @@ namespace database_registry.service.consumers
         public List<Table> GetSchemaInfo(RegisterDatabase database)
         {
             var tables = new List<Table>();
-            string queryString = System.IO.File.ReadAllText("SchemaSQL.sql");
-            string connectionString = $"Data Source={database.Server};Initial Catalog={database.Database};Integrated Security=False;User ID={database.User};Password={database.Password};Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var queryString = File.ReadAllText("SchemaSQL.sql");
+            var connectionString = $"Data Source={database.Server};Initial Catalog={database.Database};Integrated Security=False;User ID={database.User};Password={database.Password};Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
+                var command = new SqlCommand(queryString, connection);
+
                 connection.Open();
 
-                SqlDataReader reader = command.ExecuteReader();
+                var reader = command.ExecuteReader();
+
                 try
                 {
                     while (reader.Read())

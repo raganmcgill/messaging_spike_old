@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using database_registry.service.consumers;
 using helpers;
 using MassTransit;
@@ -8,6 +9,11 @@ namespace database_registry.service
 {
     class Program
     {
+        private static readonly string RabbitMqAddress = "rabbitmq://localhost";
+        private static readonly string RabbitMqQueue = "redgate.queues";
+        private static readonly string RabbitUsername = ConfigurationManager.AppSettings["RabbitUserName"];
+        private static readonly string RabbitPassword = ConfigurationManager.AppSettings["RabbitPassword"];
+
         static void Main(string[] args)
         {
             RunMassTransitReceiverWithRabbit();
@@ -19,13 +25,13 @@ namespace database_registry.service
 
             IBusControl rabbitBusControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>
             {
-                IRabbitMqHost rabbitMqHost = rabbit.Host(new Uri("rabbitmq://localhost"), settings =>
+                IRabbitMqHost rabbitMqHost = rabbit.Host(new Uri(RabbitMqAddress), settings =>
                 {
-                    settings.Password("guest");
-                    settings.Username("guest");
+                    settings.Password(RabbitUsername);
+                    settings.Username(RabbitPassword);
                 });
 
-                rabbit.ReceiveEndpoint(rabbitMqHost, "redgate.queues", conf =>
+                rabbit.ReceiveEndpoint(rabbitMqHost, RabbitMqQueue, conf =>
                 {
                     conf.Consumer<RegisterDatabaseConsumer>();
                 });
