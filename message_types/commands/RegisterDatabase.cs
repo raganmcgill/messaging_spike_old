@@ -5,6 +5,6 @@
         string Server { get; }
         string Database { get; }
         string User { get; }
-        string Password { get;}
+        string Password { get; }
     }
 }

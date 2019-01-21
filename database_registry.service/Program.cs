@@ -2,6 +2,7 @@
 using database_registry.service.consumers;
 using helpers;
 using MassTransit;
+using MassTransit.RabbitMqTransport;
 
 namespace database_registry.service
 {
@@ -9,33 +10,34 @@ namespace database_registry.service
     {
         static void Main(string[] args)
         {
-            string exchangeName = "DatabaseRegistry";
-            string queueName = "RegisterDatabase";
+            RunMassTransitReceiverWithRabbit();
+        }
 
+        private static void RunMassTransitReceiverWithRabbit()
+        {
             ConsoleAppHelper.PrintHeader("Header.txt");
 
-            var bus = Bus.Factory.CreateUsingRabbitMq(sbc =>
+            IBusControl rabbitBusControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>
             {
-                var host = sbc.Host(new Uri("rabbitmq://localhost"), h =>
+                IRabbitMqHost rabbitMqHost = rabbit.Host(new Uri("rabbitmq://localhost"), settings =>
                 {
-                    h.Username("guest");
-                    h.Password("guest");
+                    settings.Password("guest");
+                    settings.Username("guest");
                 });
 
-                sbc.ReceiveEndpoint(host, queueName, ep =>
+                rabbit.ReceiveEndpoint(rabbitMqHost, "redgate.queues", conf =>
                 {
-                    //ep.Bind(exchangeName);
-                    ep.Consumer(() => new RegisterDatabaseConsumer());
+                    conf.Consumer<RegisterDatabaseConsumer>();
                 });
-
             });
 
-            bus.Start();
+            rabbitBusControl.Start();
+
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
 
-            bus.Stop();
+            rabbitBusControl.Stop();
         }
     }
 }

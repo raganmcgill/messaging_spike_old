@@ -17,7 +17,6 @@ namespace database_registry.service.consumers
 {
     internal class RegisterDatabaseConsumer : IConsumer<RegisterDatabase>
     {
-
         private IBusControl bus;
 
         public RegisterDatabaseConsumer()
@@ -44,7 +43,7 @@ namespace database_registry.service.consumers
 
             PublishTables(context.Message, tableDefinition);
 
-            Console.WriteLine($"Registered database");
+            Console.WriteLine($"Registered database with {tableDefinition.Count} tables at {DateTime.Now}");
 
             return Task.CompletedTask;
         }
@@ -58,6 +57,7 @@ namespace database_registry.service.consumers
             };
 
             bus.Publish<DatabaseRegistered>(message);
+            
         }
 
         private void StoreDatabaseDefinition(RegisterDatabase database, List<Table> tables)
