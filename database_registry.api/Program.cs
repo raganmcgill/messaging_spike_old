@@ -9,6 +9,7 @@ namespace database_registry.api
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(80, 20);
             ConsoleAppHelper.PrintHeader("Header.txt");
 
             var baseAddress = "http://localhost:9111/api/registry/";

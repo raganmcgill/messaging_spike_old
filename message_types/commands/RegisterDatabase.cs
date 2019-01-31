@@ -1,10 +1,9 @@
-﻿namespace message_types.commands
+﻿using common_models;
+
+namespace message_types.commands
 {
     public interface RegisterDatabase
     {
-        string Server { get; }
-        string Database { get; }
-        string User { get; }
-        string Password { get; }
+        ConnectionDetails ConnectionDetails { get; set; }
     }
 }

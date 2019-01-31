@@ -1,0 +1,21 @@
+﻿@model List<dashboard.ui.Models.Notification>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Message</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var notification in Model)
+        {
+            <tr>
+                <td>@notification.Title</td>
+                <td>@notification.Message</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

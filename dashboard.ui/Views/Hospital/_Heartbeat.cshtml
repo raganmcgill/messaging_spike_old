@@ -1,0 +1,17 @@
+﻿@model List<dashboard.ui.Controllers.Beat>
+
+@foreach (var beat in Model)
+{
+    if (beat.Age <= 5)
+    {
+        <img src="~/images/greenTL.png" />
+    }
+    else if (beat.Age > 5 && beat.Age < 15)
+    {
+        <img src="~/images/amberTL.png" />
+    }
+    else
+    {
+        <img src="~/images/redTL.png" />
+    }
+}

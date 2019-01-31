@@ -12,8 +12,8 @@ namespace database_registry.api.controllers
     public class RegistryController : ApiController
     {
         private readonly IBusControl _bus;
-        private readonly string _rabbitMqAddress = "rabbitmq://localhost";
-        private readonly string _rabbitMqQueue = "redgate.queues";
+        private readonly string _rabbitMqAddress = ConfigurationManager.AppSettings["RabbitHost"];
+        private readonly string _rabbitMqQueue = ConfigurationManager.AppSettings["RabbitQueue"];
         private static readonly string RabbitUsername = ConfigurationManager.AppSettings["RabbitUserName"];
         private static readonly string RabbitPassword = ConfigurationManager.AppSettings["RabbitPassword"];
 
@@ -30,14 +30,6 @@ namespace database_registry.api.controllers
                                });
                            });
         }
-
-        [HttpGet]
-        [Route("list")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
 
         [HttpPost]
         [Route("add")]

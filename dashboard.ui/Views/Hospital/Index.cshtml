@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Hospital</h1>
+    </div>
+</div>
+
+<div class="row" id="partialViewDiv">
+</div>
+
+
+
+@section scripts
+{
+
+    <script language="javascript">
+        $(document).ready(function () {
+            window.setInterval(function () {
+                $.ajax({
+                    url: "/Hospital/GetStatuses"
+                }).done(function (data) {
+                    $("#partialViewDiv").html(data);
+                });
+            }, 3000);
+        });
+    </script>
+}

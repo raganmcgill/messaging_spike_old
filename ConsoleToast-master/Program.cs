@@ -9,13 +9,13 @@ namespace Notifications
     class Program
     {
         private static readonly string RabbitMqAddress = "rabbitmq://localhost";
-        private static readonly string RabbitMqGeneralQueueName = "redgate.queues";
         //private static readonly string RabbitMqNotificationQueueName = "redgate.notifications";
         private static readonly string RabbitUsername = ConfigurationManager.AppSettings["RabbitUserName"];
         private static readonly string RabbitPassword = ConfigurationManager.AppSettings["RabbitPassword"];
 
         static void Main(string[] args)
         {
+            Console.SetWindowSize(80, 20);
             ConsoleAppHelper.PrintHeader("Header.txt");
 
             RunMassTransitReceiverWithRabbit();
@@ -32,8 +32,17 @@ namespace Notifications
                     settings.Username(RabbitPassword);
                 });
 
-                rabbit.ReceiveEndpoint(rabbitMqHost, RabbitMqGeneralQueueName, conf => { conf.Consumer<DatabaseRegisteredConsumer>(); });
-//                rabbit.ReceiveEndpoint(rabbitMqHost, RabbitMqNotificationQueueName, conf => { conf.Consumer<NotificationConsumer>(); });
+                rabbit.ReceiveEndpoint(rabbitMqHost, "RegistrationNotifications", conf =>
+                {
+                    conf.Bind("Registrations");
+                    conf.Consumer<DatabaseRegisteredConsumer>();
+                });
+
+                rabbit.ReceiveEndpoint(rabbitMqHost, "SchemaChangedNotifications", conf =>
+                {
+                    conf.Bind("SchemaChanged");
+                    conf.Consumer<SchemaUpdatedConsumer>();
+                });
 
             });
 

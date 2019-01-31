@@ -87,6 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="consumers\DatabaseRegisteredConsumer.cs" />
+    <Compile Include="consumers\SchemaUpdatedConsumer.cs" />
+    <Compile Include="Models\RedgateNotifiation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ShellHelper.cs" />
@@ -98,6 +100,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\common_models\common_models.csproj">
+      <Project>{A23946AC-7515-4011-80E8-EFC9596F39A1}</Project>
+      <Name>common_models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\helpers\helpers.csproj">
       <Project>{1A073353-A438-4570-8CCC-CDB966F31448}</Project>
       <Name>helpers</Name>

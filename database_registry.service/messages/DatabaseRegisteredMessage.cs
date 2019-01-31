@@ -2,7 +2,7 @@
 using message_types.commands;
 using message_types.events;
 
-namespace database_registry.service.messages
+namespace monitor.service.messages
 {
     public class DatabaseRegisteredMessage : DatabaseRegistered
     {

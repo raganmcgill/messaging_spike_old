@@ -9,9 +9,8 @@ namespace dashboard.service
     {
         static void Main(string[] args)
         {
-            string exchangeName = "DatabaseRegistry";
-            string queueName = "DatabaseRegistered";
-
+            //string exchangeName = "_DatabaseRegistry";
+            Console.SetWindowSize(80, 20);
             ConsoleAppHelper.PrintHeader("Header.txt");
 
             var bus = Bus.Factory.CreateUsingRabbitMq(sbc =>
@@ -22,10 +21,16 @@ namespace dashboard.service
                     h.Password("guest");
                 });
 
-                sbc.ReceiveEndpoint(host, queueName, ep =>
+                sbc.ReceiveEndpoint(host, "DatabaseRegistered", ep =>
                 {
-                    ep.Bind(exchangeName);
+              //      ep.Bind(exchangeName);
                     ep.Consumer(() => new DatabaseRegisteredConsumer());
+                });
+
+                sbc.ReceiveEndpoint(host, "SchemaChanged", ep =>
+                {
+                //    ep.Bind(exchangeName);
+                    ep.Consumer<SchemaUpdateConsumer>();
                 });
 
             });

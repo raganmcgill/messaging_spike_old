@@ -35,6 +35,11 @@ namespace dashboard.service.consumers
         {
             string subPath = $@"C:\dev\Stores\Dashboard\{database.Server}\{database.Database}"; // your code goes here
 
+            if (Directory.Exists(subPath))
+            {
+                Directory.Delete(subPath, true);
+            }
+
             if (!Directory.Exists(subPath))
             {
                 Directory.CreateDirectory(subPath);

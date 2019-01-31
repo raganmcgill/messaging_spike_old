@@ -5,8 +5,8 @@ namespace message_types.events
 {
     public interface DatabaseRegistered
     {
-        Schema Schema { get; }
+        Database Schema { get; }
 
-        RegisterDatabase Database { get; }
+        ConnectionDetails Database { get; }
     }
 }
