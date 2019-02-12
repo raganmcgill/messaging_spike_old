@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
 using dashboard.service.consumers;
@@ -9,18 +10,23 @@ namespace dashboard.service
 {
     class Program
     {
+        private static readonly string RabbitMqAddress = ConfigurationManager.AppSettings["RabbitHost"];
+        private static readonly string RabbitUsername = ConfigurationManager.AppSettings["RabbitUserName"];
+        private static readonly string RabbitPassword = ConfigurationManager.AppSettings["RabbitPassword"];
+
         static void Main(string[] args)
         {
+
             //string exchangeName = "_DatabaseRegistry";
             Console.SetWindowSize(80, 20);
             ConsoleAppHelper.PrintHeader("Header.txt");
 
             var bus = Bus.Factory.CreateUsingRabbitMq(sbc =>
             {
-                var host = sbc.Host(new Uri("rabbitmq://localhost"), h =>
+                var host = sbc.Host(new Uri(RabbitMqAddress), h =>
                 {
-                    h.Username("guest");
-                    h.Password("guest");
+                    h.Username(RabbitUsername);
+                    h.Password(RabbitPassword);
                 });
 
                 sbc.ReceiveEndpoint(host, "DatabaseRegistered", ep =>

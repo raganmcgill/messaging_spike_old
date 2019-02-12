@@ -25,8 +25,8 @@ namespace database_registry.api.controllers
                            {
                                rabbit.Host(rabbitMqRootUri, settings =>
                                {
-                                   settings.Password(RabbitUsername);
-                                   settings.Username(RabbitPassword);
+                                   settings.Username(RabbitUsername);
+                                   settings.Password(RabbitPassword);
                                });
                            });
         }

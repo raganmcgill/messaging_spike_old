@@ -69,8 +69,8 @@ namespace monitor.service
             {
                 var rabbitMqHost = rabbit.Host(new Uri(RabbitMqAddress), settings =>
                 {
-                    settings.Password(RabbitUsername);
-                    settings.Username(RabbitPassword);
+                    settings.Username(RabbitUsername);
+                    settings.Password(RabbitPassword);
                 });
 
                 rabbit.ReceiveEndpoint(rabbitMqHost, "Registrations", conf =>

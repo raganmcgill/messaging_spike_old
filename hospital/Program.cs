@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Timers;
 using helpers;
@@ -11,6 +12,10 @@ namespace hospital
 {
     class Program
     {
+        private static readonly string RabbitMqAddress = ConfigurationManager.AppSettings["RabbitHost"];
+        private static readonly string RabbitUsername = ConfigurationManager.AppSettings["RabbitUserName"];
+        private static readonly string RabbitPassword = ConfigurationManager.AppSettings["RabbitPassword"];
+
         static void Main(string[] args)
         {
             Console.SetWindowSize(50, 30);
@@ -18,10 +23,10 @@ namespace hospital
 
             var _rabbitBusControl = Bus.Factory.CreateUsingRabbitMq(sbc =>
             {
-                var host = sbc.Host(new Uri("rabbitmq://localhost"), h =>
+                var host = sbc.Host(new Uri(RabbitMqAddress), h =>
                 {
-                    h.Username("guest");
-                    h.Password("guest");
+                    h.Username(RabbitUsername);
+                    h.Password(RabbitPassword);
                 });
 
                 sbc.ReceiveEndpoint(host, "Heartbeat", ep =>
