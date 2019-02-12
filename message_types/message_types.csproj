@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="commands\Heartbeat.cs" />
     <Compile Include="commands\NotifyUser.cs" />
+    <Compile Include="events\SchemaChanged.cs" />
     <Compile Include="events\ScriptFormatted.cs" />
     <Compile Include="commands\FormatScript.cs" />
     <Compile Include="commands\RegisterDatabase.cs" />

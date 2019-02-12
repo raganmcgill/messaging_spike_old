@@ -10,11 +10,13 @@ namespace monitor.service.models
 {
     internal static class Helper
     {
-        public static Schema GetSchemaInfo(RegisterDatabase database)
+        public static Database GetSchemaInfo(ConnectionDetails connectionDetails)
         {
-            var schema = new Schema();
+            var database = new Database(){Name = connectionDetails.Database, ConnectionDetails = connectionDetails};
+
+
             var queryString = File.ReadAllText("SchemaSQL.sql");
-            var connectionString = $"Data Source={database.Server};Initial Catalog={database.Database};Integrated Security=False;User ID={database.User};Password={database.Password};Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var connectionString = $"Data Source={connectionDetails.Server};Initial Catalog={connectionDetails.Database};Integrated Security=False;User ID={connectionDetails.User};Password={connectionDetails.Password};Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -30,7 +32,7 @@ namespace monitor.service.models
                     {
                         var tableName = reader["TABLE_NAME"].ToString();
 
-                        if (!schema.Tables.Any(x => x.Name == tableName))
+                        if (!database.Tables.Any(x => x.Name == tableName))
                         {
                             var table = new Table
                             {
@@ -38,10 +40,10 @@ namespace monitor.service.models
                                 Name = tableName
                             };
 
-                            schema.Tables.Add(table);
+                            database.Tables.Add(table);
                         }
 
-                        var tableToEdit = schema.Tables.FirstOrDefault(x => x.Name == tableName);
+                        var tableToEdit = database.Tables.FirstOrDefault(x => x.Name == tableName);
 
                         if (tableToEdit != null)
                         {
@@ -119,34 +121,7 @@ namespace monitor.service.models
                 }
             }
 
-            return schema;
-        }
-
-        public static void StoreDatabaseDefinition(RegisterDatabase database, Schema schema)
-        {
-            var subPath = $@"C:\dev\Stores\monitor\{database.Server}\{database.Database}";
-
-            if (Directory.Exists(subPath))
-            {
-                Directory.Delete(subPath, true);
-            }
-
-            if (!Directory.Exists(subPath))
-            {
-                Directory.CreateDirectory(subPath);
-            }
-
-            foreach (var table in schema.Tables)
-            {
-                var filename = $"{table.Name}.txt";
-
-                var serilisedTable = JsonConvert.SerializeObject(table);
-
-                var path = Path.Combine(subPath, filename);
-
-                File.WriteAllText(path, serilisedTable);
-            }
-
+            return database;
         }
     }
 }

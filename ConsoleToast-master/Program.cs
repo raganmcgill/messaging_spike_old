@@ -41,7 +41,7 @@ namespace Notifications
                 rabbit.ReceiveEndpoint(rabbitMqHost, "SchemaChangedNotifications", conf =>
                 {
                     conf.Bind("SchemaChanged");
-                    conf.Consumer<SchemaUpdatedConsumer>();
+                    conf.Consumer<DatabaseUpdatedConsumer>();
                 });
 
             });

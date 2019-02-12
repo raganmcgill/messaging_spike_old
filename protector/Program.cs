@@ -24,6 +24,18 @@ namespace protector
                     h.Password("guest");
                 });
 
+//                sbc.ReceiveEndpoint(host, "ProtectorQueue", ep =>
+//                {
+//                    ep.Bind("DatabaseRegistered");
+//                    ep.Consumer(() => new DatabaseRegisteredConsumer());
+//                });
+//
+//                sbc.ReceiveEndpoint(host, "ProtectorQueue", ep =>
+//                {
+//                    ep.Bind("DatabaseRegistered");
+//                    ep.Consumer(() => new DatabaseRegisteredConsumer());
+//                });
+
                 sbc.ReceiveEndpoint(host, "DatabaseRegistered", ep =>
                 {
                     ep.Consumer(() => new DatabaseRegisteredConsumer());

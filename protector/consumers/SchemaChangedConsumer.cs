@@ -9,9 +9,9 @@ using MassTransit;
 
 namespace protector.consumers
 {
-    internal class DatabaseRegisteredConsumer : IConsumer<DatabaseRegistered>
+    internal class SchemaChangedConsumer : IConsumer<SchemaChanged>
     {
-        public Task Consume(ConsumeContext<DatabaseRegistered> context)
+        public Task Consume(ConsumeContext<SchemaChanged> context)
         {
             ConsoleAppHelper.PrintHeader("Header.txt");
             Console.WriteLine(DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss"));
@@ -26,7 +26,7 @@ namespace protector.consumers
 
             var atRiskColumns = new List<Column>();
 
-            var schema = context.Message.Schema;
+            var schema = context.Message.Database;
 
             foreach (var table in schema.Tables)
             {
@@ -42,5 +42,7 @@ namespace protector.consumers
 
             return Task.CompletedTask;
         }
+        
+
     }
 }

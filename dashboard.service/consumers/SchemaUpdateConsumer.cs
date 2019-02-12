@@ -16,45 +16,16 @@ namespace dashboard.service.consumers
 
         public Task Consume(ConsumeContext<SchemaChanged> context)
         {
-//            ConsoleAppHelper.PrintHeader("Header.txt");
+            var database = context.Message.Database;
 
-            var schema = context.Message.Schema;
-
-            foreach (var table in schema.Tables)
+            foreach (var table in database.Tables)
             {
                 Console.WriteLine(table.Name);
             }
 
-            StoreDatabaseDefinition(context.Message.Database, schema.Tables);
+            StorageHelper.StoreDatabaseDefinition(context.Message.Database.ConnectionDetails, database.Tables, "Dashboard");
 
             return Task.CompletedTask;
-        }
-
-        private void StoreDatabaseDefinition(RegisterDatabase database, List<Table> tables)
-        {
-            string subPath = $@"C:\dev\Stores\Dashboard\{database.Server}\{database.Database}";
-
-            if (Directory.Exists(subPath))
-            {
-                Directory.Delete(subPath, true);
-            }
-
-            if (!Directory.Exists(subPath))
-            {
-                Directory.CreateDirectory(subPath);
-            }
-
-            foreach (var table in tables)
-            {
-                var filename = $"{table.Name}.txt";
-
-                var serilisedTable = JsonConvert.SerializeObject(table);
-
-                var path = Path.Combine(subPath, filename);
-
-                File.WriteAllText(path, serilisedTable);
-            }
-
         }
     }
 }

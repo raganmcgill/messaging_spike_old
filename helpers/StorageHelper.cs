@@ -35,7 +35,7 @@ namespace helpers
             WriteFile(path, filename, serilised);
         }
 
-        private static void StoreTables(List<Table> tables, string path)
+        private static void StoreTables(List<Table> tables, string subPath)
         {
             foreach (var table in tables)
             {
@@ -43,7 +43,7 @@ namespace helpers
 
                 var serilisedTable = JsonConvert.SerializeObject(table);
 
-                WriteFile(path, filename, serilisedTable);
+                WriteFile(subPath, filename, serilisedTable);
             }
         }
 

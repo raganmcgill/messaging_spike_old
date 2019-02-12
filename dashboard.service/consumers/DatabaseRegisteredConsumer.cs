@@ -26,36 +26,11 @@ namespace dashboard.service.consumers
                 Console.WriteLine(table.Name);
             }
 
-            StoreDatabaseDefinition(context.Message.Database, schema.Tables);
+            StorageHelper.StoreDatabaseDefinition(context.Message.Database, schema.Tables,"Dashboard");
 
             return Task.CompletedTask;
         }
 
-        private void StoreDatabaseDefinition(RegisterDatabase database, List<Table> tables)
-        {
-            string subPath = $@"C:\dev\Stores\Dashboard\{database.Server}\{database.Database}"; // your code goes here
-
-            if (Directory.Exists(subPath))
-            {
-                Directory.Delete(subPath, true);
-            }
-
-            if (!Directory.Exists(subPath))
-            {
-                Directory.CreateDirectory(subPath);
-            }
-
-            foreach (var table in tables)
-            {
-                var filename = $"{table.Name}.txt";
-
-                var serilisedTable = JsonConvert.SerializeObject(table);
-
-                var path = Path.Combine(subPath, filename);
-
-                File.WriteAllText(path, serilisedTable);
-            }
-
-        }
+       
     }
 }

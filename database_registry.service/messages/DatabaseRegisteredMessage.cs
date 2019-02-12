@@ -6,8 +6,8 @@ namespace monitor.service.messages
 {
     public class DatabaseRegisteredMessage : DatabaseRegistered
     {
-        public Schema Schema { get; set; }
+        public Database Schema { get; set; }
 
-        public RegisterDatabase Database { get; set; }
+        public ConnectionDetails Database { get; set; }
     }
 }

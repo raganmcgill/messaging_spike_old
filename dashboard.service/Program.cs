@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using dashboard.service.consumers;
 using helpers;
 using MassTransit;

@@ -7,7 +7,7 @@ namespace monitor.service.models
 {
     internal static class TableComparer
     {
-        public static void Compare(string sourceJsonString, string targetJsonString)
+        public static bool HasSchemaChanged(string sourceJsonString, string targetJsonString)
         {
             var sourceJObject = JsonConvert.DeserializeObject<JObject>(sourceJsonString);
             var targetJObject = JsonConvert.DeserializeObject<JObject>(targetJsonString);
@@ -20,17 +20,20 @@ namespace monitor.service.models
 
                     if (!JToken.DeepEquals(sourceProperty.Value, targetProp.Value))
                     {
-                        Console.WriteLine($"{sourceProperty.Key} property value is changed");
+//                        Console.WriteLine($"{sourceProperty.Key} property value is changed");
                     }
-                    else
-                    {
-                        Console.WriteLine($"{sourceProperty.Key} property value didn't change");
-                    }
+//                    else
+//                    {
+//                        Console.WriteLine($"{sourceProperty.Key} property value didn't change");
+//                    }
                 }
+
+                return true;
             }
             else
             {
-                Console.WriteLine("Objects are same");
+//                Console.WriteLine("Objects are same");
+                return false;
             }
         }
     }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Timers;
 using helpers;
@@ -15,7 +13,7 @@ namespace hospital
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(80, 20);
+            Console.SetWindowSize(50, 30);
             ConsoleAppHelper.PrintHeader("Header.txt");
 
             var _rabbitBusControl = Bus.Factory.CreateUsingRabbitMq(sbc =>
