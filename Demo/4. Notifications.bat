@@ -1,3 +1,3 @@
-PushD ..\ConsoleToast-master\bin\Debug\
+PushD ..\capabilities\notifications\notifications\bin\Debug
 RedgateNotifications.exe
 exit

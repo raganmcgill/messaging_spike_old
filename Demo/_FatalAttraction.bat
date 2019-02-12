@@ -1,3 +1,3 @@
-PushD ..\RabbitClearer\bin\Debug\
+PushD ..\utils\reset\bin\Debug
 RabbitClearer.exe
 exit

@@ -1,3 +1,3 @@
-PushD ..\dashboard.service\bin\Debug\
+PushD ..\capabilities\dashboard\dashboard.service\bin\Debug
 dashboard.service.exe
 exit
